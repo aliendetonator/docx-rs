@@ -43,7 +43,7 @@ impl<'a> Docx<'a> {
     pub fn write<W: Write + Seek>(&mut self, writer: W) -> DocxResult<W> {
         let mut writer = XmlWriter::new(ZipWriter::new(writer));
 
-        let opt = FileOptions::default()
+        let opt: FileOptions<'_, ()> = FileOptions::default()
             .compression_method(CompressionMethod::Deflated)
             .unix_permissions(0o755);
 
